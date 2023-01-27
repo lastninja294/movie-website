@@ -14,7 +14,6 @@ export default function Movies() {
   const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("rendered", page, items);
     setLoading(true);
     useGetData(`/movie-list?page=${page}&items=${items}`).then((e) => {
       setData(e);
@@ -22,7 +21,6 @@ export default function Movies() {
     });
   }, [page, items]);
 
-  console.log(data);
   return (
     <main>
       <Container classnames={["flex", "flex-col", "gap-16", "justify-center"]}>

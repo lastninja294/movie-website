@@ -10,7 +10,7 @@ const Pagination = ({ total }) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const [items, setItems] = useState(searchParams.get("items") || "10");
+  const [items, setItems] = useState(searchParams.get("items") || "20");
   const [page, setPage] = useState(searchParams.get("size") || "1");
 
   useEffect(() => {
@@ -104,14 +104,17 @@ const Pagination = ({ total }) => {
           id="countries"
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-500 focus:border-blue-500 block  p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           onChange={(e) => {
+            setPage(1);
             setItems(e.target.value);
-            router.push(pathname + `?size=${page}&items=${e.target.value}`);
+            router.push(pathname + `?size=${1}&items=${e.target.value}`);
           }}
         >
-          <option defaultValue={"10"}>10</option>
-          <option value="5">5</option>
-          <option value="15">15</option>
-          <option value="20">20</option>
+          <option defaultValue={"20"} selected={items == 20}>
+            20
+          </option>
+          <option value="50" selected={items == 50}>
+            50
+          </option>
         </select>
       </nav>
     </>
