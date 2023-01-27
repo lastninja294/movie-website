@@ -49,7 +49,7 @@ const Pagination = ({ total }) => {
               </svg>
             </div>
           </li>
-          {new Array((total / items) << 0).fill(0).map((_, i) => {
+          {new Array(total).fill(0).map((_, i) => {
             return (
               <li key={i}>
                 {(i + 1).toString() != page ? (

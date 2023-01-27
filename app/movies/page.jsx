@@ -42,7 +42,7 @@ export default function Movies() {
               ))}
             </div>
             <div className="w-full flex justify-center">
-              <Pagination total={data?.data?.total} />
+              <Pagination total={data?.data?.lastPage} />
             </div>
           </>
         ) : (
