@@ -1,0 +1,37 @@
+.movies {
+  background-color: yellow;
+  overflow: hidden;
+  position: relative;
+  color: black;
+  border-radius: 6px;
+  & > a {
+    position: relative;
+    &::after {
+      content: "";
+      background: white;
+      border-radius: 50%;
+      height: 4rem;
+      left: 50%;
+      pointer-events: none;
+      position: absolute;
+      top: 100%;
+      transform: translate(-50%);
+      transition: transform 0.4s cubic-bezier(0.66, 0, 0.34, 1);
+      width: 150%;
+      z-index: 0;
+    }
+    &:hover {
+      &::after {
+        transform: translate(-50%, -85%);
+      }
+      p {
+        color: rgb(39, 37, 37);
+      }
+    }
+    p {
+      position: relative;
+      transition: color 0.4s cubic-bezier(0.66, 0, 0.34, 1);
+      z-index: 1;
+    }
+  }
+}

@@ -6,12 +6,27 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "new": "plop",
+    "new:component": "plop component",
+    "new:page": "plop page",
+    "new:icon": "plop icon"
   },
   "dependencies": {
     "@next/font": "13.1.5",
+    "classnames": "^2.3.2",
     "next": "13.1.5",
+    "next-videos": "1.4.1",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-icons": "^4.7.1",
+    "sass": "^1.57.1",
+    "swiper": "^8.4.6"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.13",
+    "plop": "^3.1.1",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.2.4"
   }
 }

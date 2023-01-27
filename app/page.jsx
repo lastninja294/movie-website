@@ -1,91 +1,57 @@
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from './page.module.css'
+"use client";
 
-const inter = Inter({ subsets: ['latin'] })
+import { Container, SlideCard, Loader } from "@/src/components";
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper";
+
+import useGetData from "@/src/hooks/useGetData";
 
 export default function Home() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    useGetData(`/movie-list?size=${1}&items=${10}`).then((e) => setData(e));
+  }, []);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.jsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <main>
+      <Container classnames={["flex", "flex-col sm:px-0"]}>
+        <h1 className="text-3xl font-bold my-3 sm:text-left text-center">
+          Welcome to Cinerama
+        </h1>
+        <div className="overflow-hidden">
+          {data.status ? (
+            <Swiper
+              spaceBetween={50}
+              slidesPerView={1}
+              parallax={true}
+              modules={[Autoplay, Navigation]}
+              navigation
+              autoplay={{ delay: 3000 }}
+            >
+              {data?.data?.movieList.map((e) => (
+                <SwiperSlide key={e.id}>
+                  <Link href={"/movies/" + e.id.toString()}>
+                    <SlideCard
+                      title={e.title}
+                      poster={e.poster}
+                      year={e.year}
+                      genre={e.genres[0]}
+                      key={e.id}
+                    />
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <div className="w-full flex justify-center items-center min-h-screen flex-col gap-4 text-3xl">
+              <Loader />
+              <span>Loading films</span>
+            </div>
+          )}
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-        <div className={styles.thirteen}>
-          <Image src="/thirteen.svg" alt="13" width={40} height={31} priority />
-        </div>
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={inter.className}>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p className={inter.className}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
+      </Container>
     </main>
-  )
+  );
 }

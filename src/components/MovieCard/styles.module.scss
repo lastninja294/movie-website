@@ -1,0 +1,35 @@
+.card {
+  overflow: hidden;
+  position: relative;
+  border-radius: 12px;
+  max-height: 360px;
+  background-color: gray;
+  img {
+    transition: all 1s ease-in-out;
+  }
+  &:hover {
+    img {
+      object-fit: cover;
+      transform: scale(1.2);
+    }
+  }
+  .bottom {
+    position: relative;
+    z-index: 2;
+    transform: translateY(-50%);
+    padding: 0.5rem;
+    color: black;
+  }
+  .movieBottom {
+    background-image: linear-gradient(0deg, #3f5efb, #fc466b);
+    background-color: #8bc6ec;
+    background-image: linear-gradient(135deg, #e9ec8b 0%, yellow 100%);
+    border-radius: 30px;
+    position: absolute;
+    top: 60%;
+    left: -5px;
+    height: 80%;
+    width: 120%;
+    transform: skew(19deg, -9deg);
+  }
+}

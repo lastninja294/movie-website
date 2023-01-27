@@ -1,0 +1,26 @@
+.slideContainer {
+  border-radius: 6px;
+  @media (min-width: 600px) {
+    border-radius: 24px;
+  }
+  overflow: hidden;
+  h2 {
+    top: 40%;
+  }
+  p {
+    top: 55%;
+
+    @media (min-width: 1024px) {
+      top: 50%;
+    }
+
+    @media (max-width: 600px) {
+      top: 47%;
+    }
+  }
+}
+
+.image {
+  max-height: calc(70vh);
+  filter: brightness(50%) blur(5px);
+}
